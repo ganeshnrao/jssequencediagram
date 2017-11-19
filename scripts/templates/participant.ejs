@@ -1,0 +1,7 @@
+<div class="participant"
+     style="left: <%= obj.left %>%; width: <%= obj.width %>%;
+     <% if (!_.isUndefined(obj.top)) { %>top: <%= obj.top %>em;<% } %>
+     <% if (!_.isUndefined(obj.height)) { %>height: <%= obj.height %>em;<% } %>">
+    <span class="name"><%= obj.name %></span>
+    <span class="timeline"></span>
+</div>

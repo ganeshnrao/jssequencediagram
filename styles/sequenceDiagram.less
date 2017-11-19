@@ -1,0 +1,163 @@
+@import "./mixins";
+
+@font: 'Fira Mono', monospace;
+@fontSize: 10px;
+@bgColor: #333;
+@fgColor: #ccc;
+@activeColor: #fff;
+@commandBg: #444;
+@commandRtlHoverBg: #436485;
+@commandLtrHoverBg: #4a8564;
+@participantLine: 1px dashed lighten(@bgColor, 20%);
+
+.sequence-diagram {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: @font;
+    font-size: @fontSize;
+    line-height: 1em;
+    background: @bgColor;
+    color: @fgColor;
+    overflow: hidden;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .participant {
+        position: absolute;
+        top: 0;
+        height: 100%;
+
+        .name {
+            position: absolute;
+            top: 0;
+            left: 1em;
+            right: 1em;
+            text-align: center;
+        }
+
+        .timeline {
+            position: absolute;
+            left: 50%;
+            width: 0;
+            top: 1.25em;
+            height: 100%;
+            border-left: @participantLine;
+        }
+    }
+
+    .command-set {
+        .command {
+            position: absolute;
+            height: 1em;
+            background: @commandBg;
+            margin: 0 1em;
+            text-align: center;
+
+            .name {
+                line-height: 1em;
+                position: absolute;
+                padding: 0 1em;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                color: @activeColor;
+            }
+
+            &.ltr {
+                &:after {
+                    content: ' ';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: -1em;
+                    .triangle(right, 1em, 1em, @commandBg);
+                }
+
+                &:before {
+                    content: ' ';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -1em;
+                    .triangleTail(right, 1em, 1em, @commandBg);
+                }
+
+                &:hover {
+                    background: @commandLtrHoverBg;
+
+                    &:after {
+                        .triangle(right, 1em, 1em, @commandLtrHoverBg);
+                    }
+
+                    &:before {
+                        .triangleTail(right, 1em, 1em, @commandLtrHoverBg);
+                    }
+                }
+            }
+
+            &.rtl {
+                &:after {
+                    content: ' ';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -1em;
+                    .triangle(left, 1em, 1em, @commandBg);
+                }
+
+                &:before {
+                    content: ' ';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: -1em;
+                    .triangleTail(left, 1em, 1em, @commandBg);
+                }
+
+                &:hover {
+                    background: @commandRtlHoverBg;
+
+                    &:after {
+                        .triangle(left, 1em, 1em, @commandRtlHoverBg);
+                    }
+
+                    &:before {
+                        .triangleTail(left, 1em, 1em, @commandRtlHoverBg);
+                    }
+                }
+            }
+
+            &.internal {
+                margin-left: 1em;
+                background: transparent;
+                text-align: left;
+
+                .name {
+                    padding: 0 0 0 0.25em;
+                }
+
+                &:before {
+                    content: ' ';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -1em;
+                    .triangle(left, 1em, 1em, @commandBg);
+                }
+
+                &:hover {
+                    &:before {
+                        .triangle(left, 1em, 1em, @commandRtlHoverBg);
+                    }
+                }
+            }
+        }
+    }
+}

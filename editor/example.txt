@@ -1,0 +1,22 @@
+participant ChartAPI
+participant View
+participant Controller
+participant Model
+
+View->Controller: Add series
+Controller->Model: Set instruments
+Model->Controller: Change instruments
+Controller->Controller: Compute hash
+Controller->Model: Set hash
+Model->Controller: Change hash
+Controller->Controller: Reconcile model
+Controller->Controller: Restart subscriptions
+Controller->Subscription Processor: Subscribe
+Subscription Processor->Controller: Initialized
+Subscription Processor->Controller: Pending
+Subscription Processor->Controller: Complete
+Controller->View: Status complete
+View->ChartAPI: Add series
+ChartAPI->View: Export layout
+View->Controller: Export layout
+Controller->Model: Set layout
